@@ -1,6 +1,4 @@
 $(function() {
-
-
   function taskHtml(task){
     var checkedStatus = task.done ? "checked" : "";
     var liElement = '<li><div class="view"><input class="toggle" type="checkbox" '+
@@ -30,8 +28,8 @@ $(function() {
     var ulToDos = $('.todo-list');
     ulToDos.append(string);
     $('.toggle').change(toggleTask);
-
   }
+
 
   $.get("/tasks").success(function(data){
     var htmlString = ""
@@ -40,7 +38,6 @@ $(function() {
     });
     addTaskWithStatus(htmlString);
   });
-
 
   $('#new-form').submit(function(event){
     event.preventDefault();
@@ -53,6 +50,7 @@ $(function() {
     $.post("/tasks", payload).success(function(data){
       var htmlString = taskHtml(data);
       addTaskWithStatus(htmlString);
+      $('.new-todo').val('');
     });
   });
 
