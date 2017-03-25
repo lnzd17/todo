@@ -12,7 +12,11 @@ class TasksController < ApplicationController
   def create
     task = Task.create(task_params)
     render json: task
+  end
 
+  def destroy
+    @task = Task.find_by_id(params[:id])
+    @task.destroy
   end
 
 
@@ -22,7 +26,6 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :done)
   end
-
 
 
 end

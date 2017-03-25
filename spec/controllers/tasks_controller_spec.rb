@@ -17,7 +17,7 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe "tasks#update" do
+  describe "task#update" do
     it "should allow tasks to be marked as done" do
       task = FactoryGirl.create(:task, done: false)
       put :update, params: {id: task.id, task: {done: true}}
@@ -34,9 +34,16 @@ RSpec.describe TasksController, type: :controller do
       response_value = ActiveSupport::JSON.decode(@response.body)
       expect(response_value['title']).to eq("Fix things")
       expect(Task.last.title).to eq("Fix things")
-
     end
   end
 
+  describe "task#destroy" do
+    it "should allow a task to be destroyed" do
+      task = FactoryGirl.create(:task)
+      delete :destroy, params:{id: task.id}
+      gram = Task.find_by_id(task.id)
+      expect(gram).to eq nil
+    end
+  end
 
 end

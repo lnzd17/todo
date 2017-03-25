@@ -1,7 +1,12 @@
 $(function() {
+
+
+
   function taskHtml(task){
     var checkedStatus = task.done ? "checked" : "";
     var liClass = task.done ? "completed" : "";
+    var destroyButton = '<button id="'+task.id+
+    '"class="destroy"></button>';
     var liElement =
     '<li id="listItem-' + task.id +
     '" class=" '+ liClass +'">'+
@@ -12,7 +17,9 @@ $(function() {
     checkedStatus +
     '><label>' +
     task.title +
-    '</label></div></li>';
+    '</label>'+
+    destroyButton +
+    '</div></li>';
 
     return liElement;
   }
@@ -65,5 +72,18 @@ $(function() {
       $('.new-todo').val('');
     });
   });
+
+
+  $(".todo-list").on("click", "button.destroy", function(e){
+    var buttonId = $(e.target).attr("id");
+    $.post("/tasks/" + buttonId, {
+      _method: "DELETE"
+    }).success(function(data){
+      $('li#listItem-'+buttonId).fadeOut(100);
+    });
+});
+
+
+
 
 });
