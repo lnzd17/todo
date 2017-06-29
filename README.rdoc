@@ -1,0 +1,16 @@
+== README
+
+This is the first Ruby on Rails application I built using the TTD approach while attending FireHose Project's Software Engineering Bootcamp.
+
+=== Features
+* A user can add a list item
+* A user can 'mark an item as complete'
+* A user can delete a list item
+
+
+=== Tools
+* Rspec
+* FactoryGirl
+* Bootstrap
+* JS/AJAX/JQUERY
+
